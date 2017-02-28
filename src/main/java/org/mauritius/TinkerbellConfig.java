@@ -41,13 +41,13 @@ public class TinkerbellConfig {
     private DataSource primaryDataSource;
 
     @Primary
-    @Bean(name = "entityManagerSecondary")
+    @Bean(name = "entityManagerPrimary")
     public EntityManager entityManager(EntityManagerFactoryBuilder builder) {
         return entityManagerFactoryPrimary(builder).getObject().createEntityManager();
     }
 
     @Primary
-    @Bean(name = "entityManagerFactorySecondary")
+    @Bean(name = "entityManagerFactoryPrimary")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(primaryDataSource)
@@ -62,7 +62,7 @@ public class TinkerbellConfig {
     }
 
     @Primary
-    @Bean(name = "transactionManagerSecondary")
+    @Bean(name = "transactionManagerPrimary")
     PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
     }

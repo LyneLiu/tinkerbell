@@ -20,16 +20,16 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ownerId;
 
-    @Column(name = "OwnerName")
+    @Column(name = "ownername")
     private String ownerName;
 
-    @Column(name = "OwnerAge")
+    @Column(name = "ownerage")
     private String ownerAge;
 
-    @Column(name = "OwnerAddress")
+    @Column(name = "owneraddress")
     private String ownerAddress;
 
-    @Column(name = "DataChange_LastTime")
+    @Column(name = "datachange_lasttime")
     private Timestamp dataChange_LastTime;
 
 }
