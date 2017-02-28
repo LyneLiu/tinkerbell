@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "owner_table")
 @Data
-@EqualsAndHashCode(exclude = {"ownerId"})
+@EqualsAndHashCode(exclude = {"ownerid"})
 public class Owner {
 
     @Id

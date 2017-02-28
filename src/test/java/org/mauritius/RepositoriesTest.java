@@ -10,14 +10,14 @@ import org.mauritius.domain.tinkerbell.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- *
  * @Commit 注解提交测试; @Rollback 注解回滚测试。
  * http://stackoverflow.com/questions/29640989/spring4-junit4-test-transactionconfiguration-vs-transactional-use-only-one-o
- *
+ * <p>
  * Created by nn_liu on 2017/2/27.
  */
 
@@ -55,11 +55,13 @@ public class RepositoriesTest {
         owner.setOwnerAge("20");
         owner.setOwnerAddress("shanghai");
 
-        ownerRepository.save(owner);
+        if (ownerRepository.findByOwnerName("lyne") == null) {
+            ownerRepository.save(owner);
+        }
 
-        Owner owner1 = ownerRepository.findByOwnerName("lyne");
+        Owner owner1 = ownerRepository.findByOwnerName("luffy");
 
-        Assert.assertEquals(1, ownerRepository.findAll().size());
+        Assert.assertEquals(2, ownerRepository.findAll().size());
     }
 
 }
