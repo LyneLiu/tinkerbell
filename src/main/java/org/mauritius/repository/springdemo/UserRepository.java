@@ -1,5 +1,6 @@
-package org.mauritius.domain.springdemo;
+package org.mauritius.repository.springdemo;
 
+import org.mauritius.domain.springdemo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

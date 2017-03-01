@@ -25,7 +25,7 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 @EntityScan(basePackageClasses = User.class)
-@EnableJpaRepositories(basePackages = "org.mauritius.domain.springdemo",
+@EnableJpaRepositories(basePackages = "org.mauritius.repository.springdemo",
         entityManagerFactoryRef = "entityManagerFactorySecondary",
         transactionManagerRef = "transactionManagerSecondary")
 public class SpringDemoConfig {

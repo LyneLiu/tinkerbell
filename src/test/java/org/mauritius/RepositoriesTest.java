@@ -4,13 +4,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mauritius.domain.springdemo.User;
-import org.mauritius.domain.springdemo.UserRepository;
+import org.mauritius.repository.springdemo.UserRepository;
 import org.mauritius.domain.tinkerbell.Owner;
-import org.mauritius.domain.tinkerbell.OwnerRepository;
+import org.mauritius.repository.tinkerbell.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -51,17 +50,19 @@ public class RepositoriesTest {
     public void testOwnerRepositories() {
 
         Owner owner = new Owner();
+        owner.setOwnerId(0); // protection
         owner.setOwnerName("lyne");
         owner.setOwnerAge("20");
         owner.setOwnerAddress("shanghai");
 
+        /* 可以通过程序逻辑判断数据的唯一性 */
         if (ownerRepository.findByOwnerName("lyne") == null) {
             ownerRepository.save(owner);
         }
 
-        Owner owner1 = ownerRepository.findByOwnerName("luffy");
-
         Assert.assertEquals(2, ownerRepository.findAll().size());
+        Assert.assertEquals(1,ownerRepository.findByOwnerAddress("shanghai").size());
     }
+
 
 }

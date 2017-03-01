@@ -29,7 +29,7 @@ import java.util.Map;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "entityManagerFactoryPrimary",
         transactionManagerRef = "transactionManagerPrimary",
-        basePackages = {"org.mauritius.domain.tinkerbell"}) //设置Repository所在位置
+        basePackages = {"org.mauritius.repository.tinkerbell"}) //设置Repository所在位置
 public class TinkerbellConfig {
 
 
