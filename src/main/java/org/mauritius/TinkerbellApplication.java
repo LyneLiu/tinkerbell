@@ -4,8 +4,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
+import javax.swing.*;
+
+/**
+ * @Import注解导入依赖等信息；
+ * @ComponentScan指定扫描路径。
+ */
 @SpringBootApplication
+@Import(value = {SpringDemoConfig.class,TinkerbellConfig.class})
+@ComponentScan
 @EnableAutoConfiguration
 public class TinkerbellApplication {
 
