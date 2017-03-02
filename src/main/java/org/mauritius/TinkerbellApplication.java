@@ -1,13 +1,13 @@
 package org.mauritius;
 
+import org.mauritius.config.SpringDemoConfig;
+import org.mauritius.config.TinkerbellConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-
-import javax.swing.*;
 
 /**
  * @Import注解导入依赖等信息；
