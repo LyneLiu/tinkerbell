@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 public class Owner {
 
     @Id
+    @Column(name = "ownerid")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ownerId;
 

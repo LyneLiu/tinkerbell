@@ -18,4 +18,5 @@ public interface OwnerRepository extends JpaRepository<Owner, Integer> {
     @Query("select a from Owner a where a.ownerAddress like %:address% ")
     List<Owner> findByOwnerAddress(@Param("address") String address);
 
+    Owner findByOwnerId(Integer id);
 }
