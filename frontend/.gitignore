@@ -1,0 +1,10 @@
+# git ignore file
+# ignore the ide files
+*.iml
+
+# ignore the target files
+target
+
+src/main/frontend/node
+
+src/main/frontend/node_modules

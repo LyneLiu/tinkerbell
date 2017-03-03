@@ -1,0 +1,6 @@
+# git ignore file
+# ignore the ide files
+*.iml
+
+# ignore the target files
+target
