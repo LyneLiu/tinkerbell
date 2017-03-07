@@ -28,6 +28,16 @@ public class BaseController {
         return "index";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        return "logout";
+    }
+
     @RequestMapping("/resource")
     @ResponseBody
     public Map<String,Object> home(){
