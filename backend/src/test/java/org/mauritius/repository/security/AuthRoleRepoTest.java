@@ -32,7 +32,7 @@ public class AuthRoleRepoTest {
         AuthRole role = authRoleRepository.findByRoleName("admin");
         Set<AuthPermission> permissionSet = role.getAuthPerms();
         Assert.assertEquals("admin",role.getDescription());
-        Assert.assertEquals(1,permissionSet.size());
+        Assert.assertEquals(2,permissionSet.size());
     }
 
 }
