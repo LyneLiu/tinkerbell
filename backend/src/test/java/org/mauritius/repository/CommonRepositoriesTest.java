@@ -1,4 +1,4 @@
-package org.mauritius;
+package org.mauritius.repository;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 @Commit
 @EnableAutoConfiguration
-public class RepositoriesTest {
+public class CommonRepositoriesTest {
     @Autowired
     private UserRepository userRepository;
 

@@ -25,7 +25,7 @@ import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
-@EntityScan(basePackageClasses = Owner.class)
+@EntityScan(basePackages = "org.mauritius.domain.tinkerbell")
 @EnableJpaRepositories(
         entityManagerFactoryRef = "entityManagerFactoryPrimary",
         transactionManagerRef = "transactionManagerPrimary",
