@@ -1,4 +1,4 @@
-package org.mauritius.domain.tinkerbell;
+package org.mauritius.entity.po.tinkerbell;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

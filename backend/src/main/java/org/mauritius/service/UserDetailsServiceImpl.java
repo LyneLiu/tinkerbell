@@ -1,7 +1,7 @@
 package org.mauritius.service;
 
-import org.mauritius.domain.tinkerbell.AuthRole;
-import org.mauritius.domain.tinkerbell.AuthUser;
+import org.mauritius.entity.po.tinkerbell.AuthRole;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
 import org.mauritius.repository.tinkerbell.AuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +36,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        if (StringUtils.isEmpty(username)) {
+            throw new UsernameNotFoundException("用户名为空");
+        }
+
         AuthUser user = authUserRepository.findByUserName(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (AuthRole role:user.getAuthRoles()) {

@@ -1,6 +1,6 @@
 package org.mauritius.repository.tinkerbell;
 
-import org.mauritius.domain.tinkerbell.Owner;
+import org.mauritius.entity.po.tinkerbell.Owner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

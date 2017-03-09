@@ -1,5 +1,6 @@
 package org.mauritius.service;
 
+import org.mauritius.service.spi.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class SecurityServiceImpl implements SecurityService {
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
+        token.setDetails(userDetails);
 
         authenticationManager.authenticate(token);
 

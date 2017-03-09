@@ -1,13 +1,15 @@
 package org.mauritius.service;
 
-import org.mauritius.domain.tinkerbell.AuthRole;
-import org.mauritius.domain.tinkerbell.AuthUser;
+import org.mauritius.entity.po.tinkerbell.AuthRole;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
 import org.mauritius.repository.tinkerbell.AuthRoleRepository;
 import org.mauritius.repository.tinkerbell.AuthUserRepository;
+import org.mauritius.service.spi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 
 /**
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
     public void save(AuthUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setAuthRoles(new HashSet<AuthRole>(authRoleRepository.findAll()));
+
+        user.setDataChange_LastTime(user.getDataChange_LastTime() == null?new Timestamp(System.currentTimeMillis()):user.getDataChange_LastTime());
+
         authUserRepository.save(user);
     }
 

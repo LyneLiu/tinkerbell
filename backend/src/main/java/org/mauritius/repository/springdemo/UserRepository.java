@@ -1,6 +1,6 @@
 package org.mauritius.repository.springdemo;
 
-import org.mauritius.domain.springdemo.User;
+import org.mauritius.entity.po.springdemo.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,6 +1,5 @@
 package org.mauritius.config;
 
-import org.mauritius.domain.tinkerbell.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
-@EntityScan(basePackages = "org.mauritius.domain.tinkerbell")
+@EntityScan(basePackages = "org.mauritius.entity.po.tinkerbell")
 @EnableJpaRepositories(
         entityManagerFactoryRef = "entityManagerFactoryPrimary",
         transactionManagerRef = "transactionManagerPrimary",
@@ -52,7 +51,7 @@ public class TinkerbellConfig {
         return builder
                 .dataSource(primaryDataSource)
                 .properties(getVendorProperties(primaryDataSource))
-                .packages("org.mauritius.domain.tinkerbell") //设置实体类所在位置
+                .packages("org.mauritius.entity.po.tinkerbell") //设置实体类所在位置
                 .persistenceUnit("primaryPersistenceUnit")
                 .build();
     }

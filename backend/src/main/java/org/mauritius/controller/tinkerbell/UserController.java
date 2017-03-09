@@ -3,12 +3,13 @@ package org.mauritius.controller.tinkerbell;
 import org.mauritius.common.RegisterException;
 import org.mauritius.common.ResultEnum;
 import org.mauritius.common.UserValidator;
-import org.mauritius.domain.tinkerbell.AuthUser;
-import org.mauritius.service.SecurityService;
-import org.mauritius.service.UserService;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
+import org.mauritius.service.spi.SecurityService;
+import org.mauritius.service.spi.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -39,16 +40,18 @@ public class UserController {
 
         try {
             BindingResult bindingResult = new BeanPropertyBindingResult(authUser,"binding_object");
-            userValidator.validate(authUser, bindingResult);
+            /*userValidator.validate(authUser, bindingResult);
 
             if (bindingResult.hasErrors()) {
                 logger.error(bindingResult.getFieldError().toString());
                 return ResultEnum.FAILURE.getValue();
             }
 
-            userService.save(authUser);
+            userService.save(authUser);*/
 
             securityService.autologin(authUser.getUserName(), authUser.getPasswordConfirm());
+
+            securityService.findLoggedInUsername();
 
             return ResultEnum.SUCCESS.getValue();
         }catch (RegisterException e){

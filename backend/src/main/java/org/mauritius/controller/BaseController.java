@@ -1,5 +1,6 @@
 package org.mauritius.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +39,7 @@ public class BaseController {
         return "logout";
     }
 
+    @PreAuthorize("hasRole('admin')")
     @RequestMapping("/resource")
     @ResponseBody
     public Map<String,Object> home(){

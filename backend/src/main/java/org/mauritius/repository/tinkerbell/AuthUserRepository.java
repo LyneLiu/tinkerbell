@@ -1,6 +1,6 @@
 package org.mauritius.repository.tinkerbell;
 
-import org.mauritius.domain.tinkerbell.AuthUser;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

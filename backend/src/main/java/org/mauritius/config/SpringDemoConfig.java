@@ -1,6 +1,6 @@
 package org.mauritius.config;
 
-import org.mauritius.domain.springdemo.User;
+import org.mauritius.entity.po.springdemo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -47,7 +47,7 @@ public class SpringDemoConfig {
         return builder
                 .dataSource(springDemoDataSource)
                 .properties(getVendorProperties(springDemoDataSource))
-                .packages("org.mauritius.domain.springdemo") //设置实体类所在位置
+                .packages("org.mauritius.entity.po.springdemo") //设置实体类所在位置
                 .persistenceUnit("secondaryPersistenceUnit")
                 .build();
     }

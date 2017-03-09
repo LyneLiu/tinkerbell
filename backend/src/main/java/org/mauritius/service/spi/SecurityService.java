@@ -1,4 +1,4 @@
-package org.mauritius.service;
+package org.mauritius.service.spi;
 
 /**
  * Created by nn_liu on 2017/3/9.

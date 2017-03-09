@@ -1,6 +1,6 @@
-package org.mauritius.service;
+package org.mauritius.service.spi;
 
-import org.mauritius.domain.tinkerbell.AuthUser;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
 
 /**
  * Created by nn_liu on 2017/3/9.

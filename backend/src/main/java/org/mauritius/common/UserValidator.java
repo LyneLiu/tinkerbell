@@ -1,7 +1,7 @@
 package org.mauritius.common;
 
-import org.mauritius.domain.tinkerbell.AuthUser;
-import org.mauritius.service.UserService;
+import org.mauritius.entity.po.tinkerbell.AuthUser;
+import org.mauritius.service.spi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

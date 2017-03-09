@@ -1,4 +1,4 @@
-package org.mauritius.domain.springdemo;
+package org.mauritius.entity.po.springdemo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
