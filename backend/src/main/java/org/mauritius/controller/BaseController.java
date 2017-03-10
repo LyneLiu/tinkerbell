@@ -1,7 +1,9 @@
 package org.mauritius.controller;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +26,9 @@ import java.util.UUID;
 @Controller
 public class BaseController {
 
+    @PreAuthorize("hasPermission(#request,'edit')")
     @RequestMapping("/home")
-    public String index(){
+    public String index(HttpServletRequest request){
         return "index";
     }
 
