@@ -45,6 +45,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         AuthUser user = authUserRepository.findByUserName(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (AuthRole role : user.getAuthRoles()) {
+
+            if (role.getRoleName().equalsIgnoreCase("admin")){
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ACTUATOR"));
+            }
+
             // 注意：这里要ROLE_加上前缀，否则在创建角色而的时候统一加上
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 
