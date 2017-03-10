@@ -29,6 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
      * 获取用户角色信息，绑定为UserDetails实例
+     *
      * @param username
      * @return
      * @throws UsernameNotFoundException
@@ -43,10 +44,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         AuthUser user = authUserRepository.findByUserName(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (AuthRole role:user.getAuthRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        for (AuthRole role : user.getAuthRoles()) {
+            //注意：这里要ROLE_加上前缀，否则在创建角色而的时候统一加上
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
 
-        return new User(user.getUserName(),user.getPassword(),grantedAuthorities);
+        return new User(user.getUserName(), user.getPassword(), grantedAuthorities);
     }
 }
