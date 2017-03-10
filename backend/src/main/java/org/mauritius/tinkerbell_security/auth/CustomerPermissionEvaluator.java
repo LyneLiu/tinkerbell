@@ -22,9 +22,9 @@ import java.util.Set;
  * Created by nn_liu on 2017/3/9.
  */
 @Component
-public class CustomPermissionEvaluator implements PermissionEvaluator {
+public class CustomerPermissionEvaluator implements PermissionEvaluator {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomPermissionEvaluator.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerPermissionEvaluator.class);
 
     @Autowired
     private AuthRoleRepository authRoleRepository;

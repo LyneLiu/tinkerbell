@@ -45,8 +45,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         AuthUser user = authUserRepository.findByUserName(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (AuthRole role : user.getAuthRoles()) {
-            //注意：这里要ROLE_加上前缀，否则在创建角色而的时候统一加上
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            // 注意：这里要ROLE_加上前缀，否则在创建角色而的时候统一加上
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+
         }
 
         return new User(user.getUserName(), user.getPassword(), grantedAuthorities);
