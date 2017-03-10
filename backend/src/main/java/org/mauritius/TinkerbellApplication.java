@@ -1,10 +1,11 @@
 package org.mauritius;
 
-import org.mauritius.config.SpringDemoConfig;
-import org.mauritius.config.TinkerbellConfig;
+import org.mauritius.tinkerbell_portal.config.SpringDemoJPAManager;
+import org.mauritius.tinkerbell_portal.config.TinkerbellJPAManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
@@ -14,9 +15,9 @@ import org.springframework.context.annotation.Import;
  * @ComponentScan指定扫描路径。
  */
 @SpringBootApplication
-@Import(value = {SpringDemoConfig.class,TinkerbellConfig.class})
+@Import(value = {SpringDemoJPAManager.class, TinkerbellJPAManager.class})
 @ComponentScan
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {HibernateJpaAutoConfiguration.class})
 public class TinkerbellApplication {
 
 	private static ConfigurableApplicationContext springContext;
