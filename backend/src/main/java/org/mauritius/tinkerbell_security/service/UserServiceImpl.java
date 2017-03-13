@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by nn_liu on 2017/3/9.
@@ -30,7 +31,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(AuthUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setAuthRoles(new HashSet<AuthRole>(authRoleRepository.findAll()));
+
+        // 为用户默认添加guest角色
+        Set<AuthRole> roles = new HashSet<>();
+        AuthRole role = authRoleRepository.findByRoleName("guest");
+        roles.add(role);
+        user.setAuthRoles(roles);
 
         user.setDataChange_LastTime(user.getDataChange_LastTime() == null?new Timestamp(System.currentTimeMillis()):user.getDataChange_LastTime());
 
