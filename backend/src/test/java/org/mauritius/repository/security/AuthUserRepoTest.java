@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,7 +29,7 @@ public class AuthUserRepoTest {
     @Test
     public void testAuthUserRepo(){
         AuthUser user = authUserRepository.findByUserName("lyne");
-        Set<AuthRole> roleSet = user.getAuthRoles();
+        List<AuthRole> roleSet = user.getAuthRoles();
         Assert.assertEquals("1qaz2wsx",user.getPassword().toLowerCase());
         Assert.assertEquals(1,roleSet.size());
     }

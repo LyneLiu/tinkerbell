@@ -1,7 +1,7 @@
 package org.mauritius.tinkerbell_portal.common;
 
 import org.mauritius.tinkerbell_security.entity.po.AuthUser;
-import org.mauritius.tinkerbell_security.service.spi.UserService;
+import org.mauritius.tinkerbell_security.service.TBSecurityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -16,7 +16,7 @@ import org.springframework.validation.Validator;
 public class UserValidator implements Validator {
 
     @Autowired
-    private UserService userService;
+    private TBSecurityServiceImpl tBSecurityServiceImpl;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -31,7 +31,7 @@ public class UserValidator implements Validator {
         if (user.getUserName().length() < 6 || user.getUserName().length() > 32) {
             errors.rejectValue("userName", "Size.userForm.username");
         }
-        if (userService.findByUsername(user.getUserName()) != null) {
+        if (tBSecurityServiceImpl.findUserByName(user.getUserName()) != null) {
             errors.rejectValue("userName", "Duplicate.userForm.username");
         }
 

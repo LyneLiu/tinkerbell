@@ -2,6 +2,7 @@ package org.mauritius.tinkerbell_security.entity.po;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -47,7 +48,7 @@ public class AuthUser {
     @ManyToMany
     @JoinTable(name="auth_user_role",joinColumns=@JoinColumn(name="userid"),
             inverseJoinColumns=@JoinColumn(name="roleid"))
-    private Set<AuthRole> authRoles;
+    private List<AuthRole> authRoles;
 
     public Integer getUserid() {
         return userid;
@@ -97,11 +98,11 @@ public class AuthUser {
         this.dataChange_LastTime = dataChange_LastTime;
     }
 
-    public Set<AuthRole> getAuthRoles() {
+    public List<AuthRole> getAuthRoles() {
         return authRoles;
     }
 
-    public void setAuthRoles(Set<AuthRole> authRoles) {
+    public void setAuthRoles(List<AuthRole> authRoles) {
         this.authRoles = authRoles;
     }
 }

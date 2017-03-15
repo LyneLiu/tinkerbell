@@ -3,9 +3,10 @@ package org.mauritius.tinkerbell_portal.controller;
 import org.mauritius.tinkerbell_portal.common.RegisterException;
 import org.mauritius.tinkerbell_portal.common.ResultEnum;
 import org.mauritius.tinkerbell_portal.common.UserValidator;
-import org.mauritius.tinkerbell_security.entity.po.AuthUser;
-import org.mauritius.tinkerbell_security.service.spi.SecurityService;
-import org.mauritius.tinkerbell_security.service.spi.UserService;
+import org.mauritius.tinkerbell_portal.entity.vo.UserInfo;
+import org.mauritius.tinkerbell_portal.service.AuthService;
+import org.mauritius.tinkerbell_security.entity.bo.UserBean;
+import org.mauritius.tinkerbell_security.service.TBSecurityServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,52 +31,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
-
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@RequestBody AuthUser authUser) {
-
-        try {
-            BindingResult bindingResult = new BeanPropertyBindingResult(authUser,"binding_object");
-            /*userValidator.validate(authUser, bindingResult);
-
-            if (bindingResult.hasErrors()) {
-                logger.error(bindingResult.getFieldError().toString());
-                return ResultEnum.FAILURE.getValue();
-            }
-
-            userService.save(authUser);*/
-
-            securityService.autologin(authUser.getUserName(), authUser.getPasswordConfirm());
-
-            securityService.findLoggedInUsername();
-
-            return ResultEnum.SUCCESS.getValue();
-        }catch (RegisterException e){
-            logger.error("register error:",e);
-            return ResultEnum.FAILURE.getValue();
-        }
-
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String registration(@RequestBody UserInfo userInfo) {
+        return authService.register(userInfo);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+    public String login(@RequestBody UserInfo userInfo) {
 
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+        if (authService.auth(userInfo)){
+            return "success";
+        }else {
+            return "failure";
+        }
 
-        return "login";
     }
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)

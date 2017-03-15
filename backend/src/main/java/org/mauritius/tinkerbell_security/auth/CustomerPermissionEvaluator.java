@@ -47,7 +47,7 @@ public class CustomerPermissionEvaluator implements PermissionEvaluator {
            for (GrantedAuthority auth : authorities) {
                String roleName = auth.getAuthority();
                AuthRole authRole = authRoleRepository.findByRoleName(roleName);
-               Set<AuthPermission> perms = authRole.getAuthPerms();
+               List<AuthPermission> perms = authRole.getAuthPerms();
                List<String> permissions = new ArrayList<String>();
                for (AuthPermission perm : perms) {
                    permissions.add(perm.getPermissionName() == null? "":perm.getPermissionName());

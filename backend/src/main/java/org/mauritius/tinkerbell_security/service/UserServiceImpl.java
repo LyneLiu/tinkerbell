@@ -10,7 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,10 +35,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         // 为用户默认添加guest角色
-        Set<AuthRole> roles = new HashSet<>();
-        AuthRole role = authRoleRepository.findByRoleName("guest");
-        roles.add(role);
-        user.setAuthRoles(roles);
+        if (user.getAuthRoles().size() == 0 || user.getAuthRoles() == null){
+            List<AuthRole> roles = new ArrayList<>();
+            AuthRole role = authRoleRepository.findByRoleName("guest");
+            roles.add(role);
+            user.setAuthRoles(roles);
+        }
 
         user.setDataChange_LastTime(user.getDataChange_LastTime() == null?new Timestamp(System.currentTimeMillis()):user.getDataChange_LastTime());
 
