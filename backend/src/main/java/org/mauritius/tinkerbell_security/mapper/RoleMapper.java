@@ -18,7 +18,8 @@ public interface RoleMapper {
     RoleMapper MAPPER = Mappers.getMapper(RoleMapper.class);
 
     @Mappings({
-        @Mapping(source = "roleName",target = "roleName")
+            @Mapping(source = "roleName", target = "roleName"),
+            @Mapping(source = "authPerms", target = "perms")
     })
     RoleBean toRole(AuthRole authRole);
 
