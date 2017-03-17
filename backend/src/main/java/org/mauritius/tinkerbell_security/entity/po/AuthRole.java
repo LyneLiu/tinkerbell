@@ -31,7 +31,7 @@ public class AuthRole {
     @ManyToMany(mappedBy = "authRoles")
     private List<AuthUser> authUsers;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="auth_role_perm",joinColumns=@JoinColumn(name="roleid"),
             inverseJoinColumns=@JoinColumn(name="permissionid"))
     private List<AuthPermission> authPerms;

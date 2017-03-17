@@ -45,7 +45,7 @@ public class AuthUser {
     //关联到主表的外键名：主表名+下划线+主表中的主键列名,即userid
     //关联到从表的外键名：主表中用于关联的属性名+下划线+从表的主键列名,即roleid
     //主表就是关系维护端对应的表，从表就是关系被维护端对应的表
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="auth_user_role",joinColumns=@JoinColumn(name="userid"),
             inverseJoinColumns=@JoinColumn(name="roleid"))
     private List<AuthRole> authRoles;
@@ -105,4 +105,5 @@ public class AuthUser {
     public void setAuthRoles(List<AuthRole> authRoles) {
         this.authRoles = authRoles;
     }
+
 }

@@ -59,7 +59,7 @@ public class SecurityJPAManager {
     }
 
     @Bean(name = "transactionManagerSecurity")
-    PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
+    public PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
     }
 
