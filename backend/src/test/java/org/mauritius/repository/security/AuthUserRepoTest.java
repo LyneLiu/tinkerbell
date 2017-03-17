@@ -13,13 +13,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Created by nn_liu on 2017/3/8.
@@ -36,30 +33,50 @@ public class AuthUserRepoTest {
     @Autowired
     private AuthRoleRepository authRoleRepository;
 
+    @Autowired
+    @Qualifier("entityManagerSecurity")
+    private EntityManager entityManagerSecurity;
+
     @Test
     @Commit
-    public void testAuthUserRepo(){
+    public void testAuthUserRepo() {
         AuthUser user = authUserRepository.findByUserName("lyne");
         AuthRole role = authRoleRepository.findByRoleName("admin");
         List<AuthRole> roles = user.getAuthRoles();
         roles.add(role);
         authUserRepository.save(user);
-        Assert.assertEquals("1qaz2wsx",user.getPassword().toLowerCase());
-        Assert.assertEquals(1,roles.size());
+        Assert.assertEquals("1qaz2wsx", user.getPassword().toLowerCase());
+        Assert.assertEquals(1, roles.size());
     }
 
     @Test
-    public void testAuthUserRepoForRole(){
+    public void testAuthUserRepoForRole() {
 
-        AuthUser user = authUserRepository.findByUserName("lyne");
+        EntityTransaction txn = entityManagerSecurity.getTransaction();
 
-        user.getAuthRoles().removeIf(authRole -> authRole.getRoleName().equalsIgnoreCase("admin"));
+        try {
 
-        Assert.assertEquals("lyne",user.getUserName());
+            txn.begin();
+
+            AuthUser user = authUserRepository.findByUserName("lyne");
+
+            user.getAuthRoles().removeIf(authRole -> authRole.getRoleName().equalsIgnoreCase("admin"));
+
+            entityManagerSecurity.merge(user);
+
+            txn.commit();
+
+            Assert.assertEquals("lyne", user.getUserName());
+
+        } catch (Exception e) {
+            // do nothing
+        }
+
+
     }
 
     @Test
-    public void testAuthUserRepoForPerm(){
+    public void testAuthUserRepoForPerm() {
 
     }
 
