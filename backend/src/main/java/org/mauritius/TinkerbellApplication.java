@@ -6,9 +6,12 @@ import org.mauritius.tinkerbell_security.config.SecurityJPAManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 /**
  * @Import注解导入依赖等信息；
@@ -16,7 +19,7 @@ import org.springframework.context.annotation.Import;
  */
 @SpringBootApplication
 @Import(value = {SpringDemoJPAManager.class, TinkerbellJPAManager.class, SecurityJPAManager.class})
-@ComponentScan
+@ComponentScan(basePackages = "org.mauritius")
 @EnableAutoConfiguration
 public class TinkerbellApplication {
 
@@ -33,6 +36,20 @@ public class TinkerbellApplication {
      */
 	public static ConfigurableApplicationContext getContext(){
 		return springContext;
+	}
+
+	/**
+	 * UTF-8编码
+	 * @return
+     */
+	@Bean
+	public FilterRegistrationBean filterRegistrationBean() {
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		characterEncodingFilter.setForceEncoding(true);
+		characterEncodingFilter.setEncoding("UTF-8");
+		registrationBean.setFilter(characterEncodingFilter);
+		return registrationBean;
 	}
 
 }

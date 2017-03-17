@@ -1,5 +1,6 @@
 package org.mauritius.tinkerbell_security.service;
 
+import org.mauritius.tinkerbell_security.entity.bo.RoleBean;
 import org.mauritius.tinkerbell_security.entity.bo.UserBean;
 import org.mauritius.tinkerbell_security.entity.po.AuthUser;
 import org.mauritius.tinkerbell_security.mapper.UserMapper;
@@ -7,6 +8,10 @@ import org.mauritius.tinkerbell_security.service.spi.SecurityService;
 import org.mauritius.tinkerbell_security.service.spi.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 提供spring security权限的相关api
@@ -50,8 +55,10 @@ public class TBSecurityServiceImpl extends BaseService {
     public boolean register(UserBean userBean) {
 
         try {
+
             AuthUser authUser = UserMapper.MAPPER.fromUser(userBean);
-            userService.save(authUser);
+
+            //userService.save(authUser);
             securityService.autologin(userBean.getUserName(), userBean.getPassword());
         } catch (Exception e) {
             logger.error("register error:", e);

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,14 +34,17 @@ public class AuthService {
     public String register(UserInfo userInfo) {
         try {
             BindingResult bindingResult = new BeanPropertyBindingResult(userInfo, "binding_object");
-            userValidator.validate(userInfo, bindingResult);
 
+            UserBean userBean = buildUserBean(userInfo);
+
+            userValidator.validate(userBean, bindingResult);
+
+            /* 临时关闭校验
             if (bindingResult.hasErrors()) {
                 logger.error(bindingResult.getFieldError().toString());
                 return ResultEnum.FAILURE.getValue();
-            }
+            }*/
 
-            UserBean userBean = buildUserBean(userInfo);
             boolean result = false;
             if (userBean != null) {
                 result = tBSecurityServiceImpl.register(userBean);
@@ -55,6 +59,9 @@ public class AuthService {
         } catch (RegisterException e) {
             logger.error("register error:", e);
             return ResultEnum.FAILURE.getValue();
+        } catch (Exception e) {
+            logger.error("register error:", e);
+            return ResultEnum.FAILURE.getValue();
         }
     }
 
@@ -62,7 +69,6 @@ public class AuthService {
         UserBean userBean = new UserBean();
         userBean.setUserName(userInfo.getUserName());
         userBean.setPassword(userInfo.getPassword());
-        userBean.setRoles(buildRoles(userInfo.getRoles(), userInfo.getPerms()));
         return userBean;
     }
 
@@ -73,8 +79,4 @@ public class AuthService {
 
     }
 
-    private List<RoleBean> buildRoles(List<String> roles, List<String> perms) {
-        //TODO:构建用户角色
-        return null;
-    }
 }

@@ -42,6 +42,15 @@ public class UserServiceImpl implements UserService {
             user.setAuthRoles(roles);
         }
 
+        if(user.getAuthRoles().size() == 1){
+            user.getAuthRoles().get(0).getRoleName().equalsIgnoreCase("guest");
+            List<AuthRole> roles = new ArrayList<>();
+            AuthRole role = authRoleRepository.findByRoleName("guest");
+            roles.add(role);
+            user.setAuthRoles(roles);
+        }
+
+
         user.setDataChange_LastTime(user.getDataChange_LastTime() == null?new Timestamp(System.currentTimeMillis()):user.getDataChange_LastTime());
 
         authUserRepository.save(user);

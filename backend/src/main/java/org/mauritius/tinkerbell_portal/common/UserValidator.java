@@ -1,12 +1,18 @@
 package org.mauritius.tinkerbell_portal.common;
 
+import org.mauritius.tinkerbell_security.entity.bo.RoleBean;
+import org.mauritius.tinkerbell_security.entity.bo.UserBean;
 import org.mauritius.tinkerbell_security.entity.po.AuthUser;
+import org.mauritius.tinkerbell_security.mapper.UserMapper;
 import org.mauritius.tinkerbell_security.service.TBSecurityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 校验用户注册 or 登录信息
@@ -25,7 +31,19 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        AuthUser user = (AuthUser) target;
+
+        UserBean userBean = (UserBean)target;
+
+        if (userBean.getRoles() == null) {
+            RoleBean roleBean = new RoleBean();
+            roleBean.setRoleName("guest");
+            List<RoleBean> roleBeans = new ArrayList<>();
+            roleBeans.add(roleBean);
+            userBean.setRoles(roleBeans);
+        }
+
+        AuthUser user = UserMapper.MAPPER.fromUser(userBean);
+        user.setPasswordConfirm(user.getPassword() == null? "guest":user.getPassword());
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty");
         if (user.getUserName().length() < 6 || user.getUserName().length() > 32) {

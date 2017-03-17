@@ -39,7 +39,7 @@ public class BaseController {
         return authService.register(userInfo);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody UserInfo userInfo) {
 
         if (authService.auth(userInfo)){
