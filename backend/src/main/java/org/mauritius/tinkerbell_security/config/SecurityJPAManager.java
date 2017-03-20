@@ -19,6 +19,9 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 /**
+ * 1、entityManager用来管理dao层的entity;
+ * 2、transactionManager用来管理jdbc业务层的处理，如果不定义默认的transaction，可以关闭：enableDefaultTransactions=false.
+ *
  * Created by nn_liu on 2017/2/27.
  */
 
@@ -30,8 +33,7 @@ import java.util.Map;
         transactionManagerRef = "transactionManagerSecurity",
         basePackages = {"org.mauritius.tinkerbell_security.repository"}) //设置Repository所在位置
 public class SecurityJPAManager {
-
-
+    
     @Autowired
     private JpaProperties jpaProperties;
 
@@ -41,11 +43,11 @@ public class SecurityJPAManager {
 
     @Bean(name = "entityManagerSecurity")
     public EntityManager entityManager(EntityManagerFactoryBuilder builder) {
-        return entityManagerFactoryPrimary(builder).getObject().createEntityManager();
+        return entityManagerFactorySecurity(builder).getObject().createEntityManager();
     }
 
     @Bean(name = "entityManagerFactorySecurity")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary(EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactorySecurity(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(securityDataSource)
                 .properties(getVendorProperties(securityDataSource))
@@ -60,7 +62,7 @@ public class SecurityJPAManager {
 
     @Bean(name = "transactionManagerSecurity")
     public PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
+        return new JpaTransactionManager(entityManagerFactorySecurity(builder).getObject());
     }
 
 }
