@@ -6,7 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * 自定义的权限控制，如：
+ * @PreAuthorize("@consumerSPELPermissionValidator.hasDescPermission(#roleName, #desc)")
+ *
+ */
 @Component
 public class ConsumerSPELPermissionValidator {
 
