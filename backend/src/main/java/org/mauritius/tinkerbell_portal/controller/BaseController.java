@@ -39,6 +39,11 @@ public class BaseController {
         return authService.register(userInfo);
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String home(){
+        return "redirect:/login";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody UserInfo userInfo) {
 
