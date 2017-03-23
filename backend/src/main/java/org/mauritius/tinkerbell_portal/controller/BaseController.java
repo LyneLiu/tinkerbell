@@ -41,7 +41,7 @@ public class BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String home(){
-        return "redirect:/login";
+        return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
