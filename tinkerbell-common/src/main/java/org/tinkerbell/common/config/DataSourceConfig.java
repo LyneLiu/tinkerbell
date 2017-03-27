@@ -1,4 +1,4 @@
-package org.tinkerbell.config;
+package org.tinkerbell.common.config;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;

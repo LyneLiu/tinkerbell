@@ -1,4 +1,4 @@
-package org.tinkerbell.config;
+package org.tinkerbell.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

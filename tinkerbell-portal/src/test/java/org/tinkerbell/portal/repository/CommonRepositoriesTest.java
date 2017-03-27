@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.tinkerbell.TinkerbellApplication;
-import org.tinkerbell.TinkerbellCommonApplication;
+import org.tinkerbell.common.TinkerbellCommonApplication;
 import org.tinkerbell.entity.po.springdemo.User;
 import org.tinkerbell.entity.po.tinkerbell.Owner;
 import org.tinkerbell.repository.springdemo.UserRepository;

@@ -1,4 +1,4 @@
-package org.tinkerbell.util;
+package org.tinkerbell.common.util;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

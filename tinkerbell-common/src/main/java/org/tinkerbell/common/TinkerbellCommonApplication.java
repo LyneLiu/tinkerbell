@@ -1,4 +1,4 @@
-package org.tinkerbell;
+package org.tinkerbell.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
