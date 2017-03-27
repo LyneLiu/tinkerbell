@@ -10,7 +10,7 @@
     <description>Demo project for Spring Boot</description>
 
     <parent>
-        <groupId>org.mauritius</groupId>
+        <groupId>org.tinkerbell</groupId>
         <artifactId>tinkerbell</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
