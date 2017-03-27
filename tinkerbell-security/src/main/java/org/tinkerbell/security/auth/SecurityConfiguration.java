@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Created by nn_liu on 2017/3/2.
  */
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final static Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
@@ -32,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * Request层面的配置，对应XML Configuration中的<http>元素
+     *
      * @param http
      * @throws Exception
      */
@@ -43,33 +44,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/resources/**", "/register").permitAll()
             .anyRequest().authenticated()
             .and()
-        .formLogin()
+            .formLogin()
             .loginPage("/login")
             .permitAll()
             .and()
-        .logout()
+            .logout()
             .logoutSuccessUrl("/logout")
             .permitAll();
     }
 
 
-    protected void configure(AuthenticationManagerBuilder auth){
-        try
-        {
+    protected void configure(AuthenticationManagerBuilder auth) {
+        try {
             super.configure(auth);
             logger.info("<<<<<<<<<<<<<<< auth here >>>>>>>>>>>>>>>>>>");
 
             //auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery().authoritiesByUsernameQuery();
             auth.userDetailsService(userDetailsService);
 
-        }catch (Exception e){
-            logger.error("auth error:",e);
+        } catch (Exception e) {
+            logger.error("auth error:", e);
         }
 
     }
 
     /**
      * Web层面的配置，一般用来配置无需安全检查的路径
+     *
      * @param web
      */
     @Override
@@ -79,6 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**
      * 身份验证配置，用于注入自定义身份验证Bean和密码校验规则
+     *
      * @param auth
      * @throws Exception
      */

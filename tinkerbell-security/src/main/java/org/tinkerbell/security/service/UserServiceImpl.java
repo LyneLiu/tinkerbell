@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(AuthUser user) {
+        
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         // 为用户默认添加guest角色
@@ -40,8 +41,7 @@ public class UserServiceImpl implements UserService {
             user.setAuthRoles(roles);
         }
 
-        if(user.getAuthRoles().size() == 1){
-            user.getAuthRoles().get(0).getRoleName().equalsIgnoreCase("guest");
+        if(user.getAuthRoles().size() == 1 && user.getAuthRoles().get(0).getRoleName().equalsIgnoreCase("guest")){
             List<AuthRole> roles = new ArrayList<AuthRole>();
             AuthRole role = authRoleRepository.findByRoleName("guest");
             roles.add(role);
