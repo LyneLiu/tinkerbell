@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 用户-角色的认证授权
  * Created by nn_liu on 2017/3/9.
  */
 

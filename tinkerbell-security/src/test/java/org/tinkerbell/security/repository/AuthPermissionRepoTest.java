@@ -3,7 +3,7 @@ package org.tinkerbell.security.repository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.tinkerbell.TinkerbellSecurityApplication;
+import org.tinkerbell.security.TinkerbellSecurityApplication;
 import org.tinkerbell.common.TinkerbellCommonApplication;
 import org.tinkerbell.security.entity.po.AuthPermission;
 import org.springframework.beans.factory.annotation.Autowired;
