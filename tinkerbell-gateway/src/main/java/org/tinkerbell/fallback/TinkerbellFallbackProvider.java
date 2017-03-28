@@ -25,6 +25,10 @@ public class TinkerbellFallbackProvider implements ZuulFallbackProvider {
         return "tinkerbell";
     }
 
+    /**
+     * service中断的情况下，返回响应信息至client
+     * @return
+     */
     @Override
     public ClientHttpResponse fallbackResponse() {
 
