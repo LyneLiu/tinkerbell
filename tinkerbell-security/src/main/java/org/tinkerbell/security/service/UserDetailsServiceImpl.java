@@ -1,5 +1,6 @@
 package org.tinkerbell.security.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.tinkerbell.security.entity.po.AuthRole;
 import org.tinkerbell.security.entity.po.AuthUser;
 import org.tinkerbell.security.repository.AuthUserRepository;

@@ -21,13 +21,13 @@ public class TokenUtil {
     private static final Logger logger = LoggerFactory.getLogger(TokenUtil.class);
 
     @Value("${spring.application.name}")
-    private String appName;
+    private String APP_NAME;
 
     @Value("${jwt.secret}")
-    private String secret;
+    private String SECRET;
 
     @Value("${jwt.expires_in}")
-    private int expiresTimeMills;
+    private int EXPIRES_IN;
 
     /**
      * token中获取user name
@@ -39,9 +39,9 @@ public class TokenUtil {
         String userName;
 
         Claims claims = this.getClaimsFromToken(token);
-        if (claims != null){
+        if (claims != null) {
             userName = claims.getSubject();
-        }else {
+        } else {
             userName = "";
         }
 
@@ -58,11 +58,11 @@ public class TokenUtil {
     public String generateJsonWerbToken(String userName) {
 
         String jwt = Jwts.builder()
-                .setIssuer(appName)
+                .setIssuer(APP_NAME)
                 .setSubject(userName)
                 .setIssuedAt(new Date(DateUtil.getCurrentTimeMills()))
-                .setExpiration(new Date(DateUtil.getCurrentTimeMills() + expiresTimeMills))
-                .signWith(SignatureAlgorithm.HS512,secret)
+                .setExpiration(new Date(DateUtil.getCurrentTimeMills() + EXPIRES_IN))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         return jwt;
 
@@ -73,11 +73,11 @@ public class TokenUtil {
         Claims claims;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(SECRET)
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            logger.warn("parse token exception:",e);
+            logger.warn("parse token exception:", e);
             claims = null;
         }
 

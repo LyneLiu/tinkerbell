@@ -30,22 +30,6 @@ public class BaseController {
         return authService.register(userInfo);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String home(){
-        return "login";
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody UserInfo userInfo) {
-
-        if (authService.auth(userInfo)){
-            return "success";
-        }else {
-            return "failure";
-        }
-
-    }
-
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
