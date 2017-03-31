@@ -1,5 +1,7 @@
 package org.tinkerbell.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.tinkerbell.entity.vo.UserInfo;
 import org.tinkerbell.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by nn_liu on 2017/2/24.
@@ -33,6 +39,14 @@ public class BaseController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
+    }
+
+    @RequestMapping(value = "/responseEntiry",method = RequestMethod.GET)
+    public ResponseEntity<Map<String,String>> queryInfo(){
+        Map<String, String> model = new HashMap<String, String>();
+        model.put("id", UUID.randomUUID().toString());
+        model.put("content", "Hello World");
+        return new ResponseEntity<Map<String, String>>(model, HttpStatus.OK);
     }
 
 }
