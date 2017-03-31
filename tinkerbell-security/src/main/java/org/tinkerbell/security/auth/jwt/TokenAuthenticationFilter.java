@@ -92,7 +92,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
          */
         String authHeader = request.getHeader(AUTH_HEADER);
         if ( authHeader != null && authHeader.startsWith("Tinkerbell ")) {
-            return authHeader.substring(7);
+            return authHeader.substring(11);
         }
 
         return null;
