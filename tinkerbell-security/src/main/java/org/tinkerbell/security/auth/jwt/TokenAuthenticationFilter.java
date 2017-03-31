@@ -91,7 +91,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
          *  e.g Bearer your_token
          */
         String authHeader = request.getHeader(AUTH_HEADER);
-        if ( authHeader != null && authHeader.startsWith("Bearer ")) {
+        if ( authHeader != null && authHeader.startsWith("Tinkerbell ")) {
             return authHeader.substring(7);
         }
 
