@@ -61,7 +61,7 @@ public class TokenUtil {
                 .setIssuer(APP_NAME)
                 .setSubject(userName)
                 .setIssuedAt(new Date(DateUtil.getCurrentTimeMills()))
-                .setExpiration(new Date(DateUtil.getCurrentTimeMills() + EXPIRES_IN))
+                .setExpiration(new Date(DateUtil.getCurrentTimeMills() + EXPIRES_IN * 1000))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         return jwt;
