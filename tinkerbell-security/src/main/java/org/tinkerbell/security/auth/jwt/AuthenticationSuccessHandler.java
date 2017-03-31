@@ -45,6 +45,15 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 		clearAuthenticationAttributes(request);
 		User user = (User)authentication.getPrincipal();
 
+		/**
+		 **************************************************
+		 *
+		 *  在login认证成功的情况下，生成JWT的token并将该token更新至数据库，供TokenAuthenticationFilter认证使用！
+		 *  比如：jwtTokenService.update(user.getUsername(),gettoken);
+		 *
+		 **************************************************
+		 */
+
 		String jws = tokenUtil.generateJsonWerbToken( user.getUsername() );
 
         // Create token auth Cookie

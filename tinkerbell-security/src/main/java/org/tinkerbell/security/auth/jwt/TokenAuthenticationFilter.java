@@ -40,9 +40,28 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * 当用户JWT的token传输至service端的时候，解析token，并授权当前用户，实现JWT的认证、授权。
+     *
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authToken = getToken( request );
+
+        /**
+         **************************************************
+         *
+         *  仅仅使用JWT认证的方式：将token保存至数据库，并且对比token是否超期、用户名是否一致等；
+         *  如果不一致则不放行。
+         *
+         **************************************************
+         */
+
         // get username from token
         String username = tokenUtil.getUserNameFromToken( authToken );
         if ( username != null && !"".equals(username)) {
