@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.tinkerbell.security.service.UserDetailsServiceImpl;
 import org.tinkerbell.security.util.TokenUtil;
 
 import javax.servlet.FilterChain;
@@ -62,8 +61,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
          **************************************************
          */
 
+        // 如果使用tinkerbell-admin监控应用信息，需要关闭JWT校验
         // get username from token
         String username = tokenUtil.getUserNameFromToken( authToken );
+        // String username = "test_test";
+
         if ( username != null && !"".equals(username)) {
             // get user
             UserDetails userDetails = userDetailsService.loadUserByUsername( username );
