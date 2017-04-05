@@ -42,14 +42,14 @@ public class CustomHealthIndicator implements HealthIndicator {
             // 1、回路测试，验证本机的TCP/IP协议簇是否正常
             inet = InetAddress.getByAddress(new byte[]{127, 0, 0, 1});
             logger.info("Sending Ping Request to " + inet);
-            if (!inet.isReachable(5000)) {
+            if (!inet.isReachable(500)) {
                 resultCode = -1;
             }
 
             // 2、测试DNS服务器是否正常
-            inet = InetAddress.getByAddress(new byte[]{8, 8, 8, 8});
+            inet = InetAddress.getByAddress(new byte[]{(byte)192, (byte)168, 102, 20});
             logger.info("Sending Ping Request to " + inet);
-            if (!inet.isReachable(5000)) {
+            if (!inet.isReachable(500)) {
                 resultCode = -2;
             }
 
