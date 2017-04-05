@@ -22,13 +22,13 @@ public class MetricMethodImpl {
     private CounterService counterService;
 
     @Pointcut("@annotation(MetricMethod)")
-    public void MetricMethod() { }
+    public void metricMethod() { }
 
-    /*@Before("MethodCheck()")
-    public void beforeInvoke(){
-        logger.warn("Before AOP method invoked!");
+    @Pointcut("execution(public * org.tinkerbell.controller.*.*(..))")
+    public void controllerMetric(){
     }
 
+    /*
     // ProceedingJoinPoint is only supported for around advice
     @Around("MethodCheck()")
     public void aroundInvoke(ProceedingJoinPoint joinPoint){
@@ -43,14 +43,14 @@ public class MetricMethodImpl {
 
     }*/
 
-    /*@After("MetricMethod()")
-    public void afterInvoke(ProceedingJoinPoint joinPoint){
-        counterService.increment(joinPoint.getSignature().toShortString());
-    }*/
+    @Before("controllerMetric()")
+    public void beforInvoke(JoinPoint joinPoint){
+        logger.info("calling...:"+joinPoint.getSignature().getName());
+    }
 
-    @After("MetricMethod()")
+    @After("metricMethod()")
     public void afterInvoke(JoinPoint joinPoint){
-        counterService.increment(joinPoint.getSignature().toShortString());
+        counterService.increment(joinPoint.getSignature().getName());
     }
 
 }
