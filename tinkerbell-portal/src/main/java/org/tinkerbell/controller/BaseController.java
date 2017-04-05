@@ -2,6 +2,7 @@ package org.tinkerbell.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.tinkerbell.common.MetricMethod;
 import org.tinkerbell.entity.vo.UserInfo;
 import org.tinkerbell.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class BaseController {
         return authService.register(userInfo);
     }
 
+    @MetricMethod
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
         return "welcome";
