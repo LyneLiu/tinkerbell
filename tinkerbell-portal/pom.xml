@@ -128,6 +128,39 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.20.1</version>
+				<configuration>
+				  <images>
+					<image>
+					
+						<alias>tinkerbell</alias>
+						<name>lyne/tinkerbell:${project.version}</name>
+					
+						<build> 
+							<from>tomcat:jre8</from> 
+							<cmd> 
+							<shell>java -jar /target/tinkerbell-portal.war</shell>
+							</cmd>
+						</build>
+
+						<run> 
+							<ports> 
+								<port>tomcat.port:8080</port>
+							</ports>
+							<wait> 
+							<http>
+							  <url>http://localhost:${tomcat.port}/access</url>
+							</http>
+							<time>10000</time>
+							</wait>
+						</run>
+					</image>
+				  </images>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 
