@@ -1,5 +1,5 @@
-#基础镜像：仓库是java，标签用3.3.9-jdk-8
-FROM maven:3.3.9-jdk-8
+#基础镜像：仓库是lyne/tomcat，标签用8.5-jre8-3.5
+FROM lyne/tomcat:8.5-jre8-3.5
 #当前镜像的维护者和联系方式
 MAINTAINER lyne lyne@liu332520@163.com
 #将打包好的spring程序拷贝到容器中的指定位置
